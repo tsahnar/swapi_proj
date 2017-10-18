@@ -12,19 +12,25 @@ class FavoritesHandler {
 	addRemoveFromFavorites(isFavorite, identifier) {
 		if (isFavorite){
 			remove(this.favorites, (idt) => { return idt == identifier })
-			localStorage.setItem('favoritesArr', JSON.stringify(this.favorites));
+			setLocalStorage(this.favorites);
 		}else{
 			// Add to favorites array
 			// Beacuse there is no ID for returned items in API, I will identify the item by its url.
 			this.favorites.push(identifier);
-			localStorage.setItem('favoritesArr', JSON.stringify(this.favorites));
+			setLocalStorage(this.favorites);	
 		}
 	};
 
 	checkIfFavorite(identifier){
 	  	return includes(this.favorites, identifier);
 	};
+
+
 }
 
+// Helper
+const setLocalStorage = (items) => {
+	localStorage.setItem('favoritesArr', JSON.stringify(items));
+}
 
 export default new FavoritesHandler();

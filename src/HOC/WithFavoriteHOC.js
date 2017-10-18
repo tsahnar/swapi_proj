@@ -10,7 +10,7 @@ const WithFavoriteHOC = Component => (
 
     constructor(props) {
       super(props)
-      
+
       // Init item isFavorite state to be able to display if the item was already added to favorites
       this.state = { isFavorite: FavoritesHandler.checkIfFavorite(this.props.item.url)}
     }
@@ -31,7 +31,6 @@ const WithFavoriteHOC = Component => (
             </div>
           
           </Component>
-
       ) 
     }
   }
