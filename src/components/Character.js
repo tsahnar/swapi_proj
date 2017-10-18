@@ -6,7 +6,6 @@ import WithFavoriteHOC from '../HOC/WithFavoriteHOC'
 const Character = ({item: character, children}) => (
 	<li >
 		<div className="list-item-title">{character.name}</div>
-
 		<div className="list-info">
 			<span>Birth year: {character.birth_year}</span>
 		</div>

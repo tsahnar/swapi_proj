@@ -1,7 +1,7 @@
 import { includes, remove } from 'lodash';
 
 // FavoritesHandler is a class (Singelton) which keeps track on favorites in local storage
-// And handles add/removal of items
+// and handles add/removal of items
 
 class FavoritesHandler {
 
