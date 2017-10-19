@@ -71,23 +71,4 @@ WithDataHOC.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-
-    // if (data.results){
-    //     return (
-    //         <div>
-    //          
-    //           { data.next && 
-    //             ( <div className="text-center">
-    //                 <button disabled={loadMore} className="load-more-btn btn btn-default" 
-    //                         onClick={() => this.loadMore()}>
-    //                         Load More
-    //                 </button>
-    //               </div>
-    //             )
-    //           }
-    //         </div>
-    //       )
-    //   }else{
-    //     return <Spinner/>
-    //   }
 export default WithDataHOC
