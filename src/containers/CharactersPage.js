@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import WithDataHOC from '../HOC/WithDataHOC'
 import List from '../components/common/List'
 import Character from '../components/Character'
+
 
 const CharactersPage  = ({ data: filmsData}) => {
 	return (
@@ -16,8 +18,9 @@ const CharactersPage  = ({ data: filmsData}) => {
 	)
 }
 
+// Data property is required in order to render content
 CharactersPage.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 

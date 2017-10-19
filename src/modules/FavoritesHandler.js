@@ -24,8 +24,6 @@ class FavoritesHandler {
 	checkIfFavorite(identifier){
 	  	return includes(this.favorites, identifier);
 	};
-
-
 }
 
 // Helper
@@ -33,4 +31,5 @@ const setLocalStorage = (items) => {
 	localStorage.setItem('favoritesArr', JSON.stringify(items));
 }
 
+// Intasnsiate the class and expose it
 export default new FavoritesHandler();

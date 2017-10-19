@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 require('./List.scss');
 
 const List = ({ list , render }) => (
@@ -8,7 +9,7 @@ const List = ({ list , render }) => (
 )
 
 List.propTypes = {
-  render: React.PropTypes.func.isRequired
+  render: PropTypes.func.isRequired
 }
 
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import WithDataHOC from '../HOC/WithDataHOC'
 import List from '../components/common/List'
 import StarShip from '../components/StarShip'
 
 const StarShipsPage =  ({ data: starshipsData }) => {
-	console.log(starshipsData);
 	return (
 		<div>
 			<h4 className="page-title text-center">
@@ -18,7 +18,7 @@ const StarShipsPage =  ({ data: starshipsData }) => {
 }
 
 StarShipsPage.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 

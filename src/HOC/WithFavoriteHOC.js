@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import FavoritesHandler from '../modules/FavoritesHandler'
 
 // This higher order component handles adding/removing favorites 
@@ -23,21 +24,20 @@ const WithFavoriteHOC = Component => (
     render() {
       let favClass = this.state.isFavorite ? 'on' : '';
       return  (
-          <Component {...this.props} {...this.state} >
-            <div className="favorite">
-              <span className={'glyphicon glyphicon-star favorite ' + favClass}
-                    onClick={() => {this.handleFavoriteClick()}}>
-              </span>
-            </div>
-          
-          </Component>
+        <Component {...this.props} {...this.state} >
+          <div className="favorite">
+            <span className={'glyphicon glyphicon-star favorite ' + favClass}
+                  onClick={() => {this.handleFavoriteClick()}}>
+            </span>
+          </div>
+        </Component>
       ) 
     }
   }
 )
 
 WithFavoriteHOC.propTypes = {
-  item: React.PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default WithFavoriteHOC

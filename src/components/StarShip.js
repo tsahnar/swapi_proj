@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WithFavoriteHOC from '../HOC/WithFavoriteHOC'
+import PropTypes from 'prop-types';
 	
 // Render single film item
 
@@ -14,7 +15,7 @@ const StarShip =  ({ item: starShip, children}) => (
 )
 
 StarShip.propTypes = {
-  item: React.PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 

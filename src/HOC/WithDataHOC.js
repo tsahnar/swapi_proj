@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Spinner from '../components/common/Spinner'
+
 
 // This higher order component handles fetching data from swapi.
 // A url (SWAPI endpint) must be provided for every component this HOC wraps.
@@ -9,7 +11,7 @@ const WithDataHOC = url => Component => (
 
     constructor(props) {
       super(props)
-      this.state = { data: null, loadMore: false, fetchError: false}
+      this.state = { data: {}, loading: true, fetchError: false}
     }
 
     componentDidMount() {
@@ -17,7 +19,7 @@ const WithDataHOC = url => Component => (
     }
 
     loadMore(){
-      this.setState({ loadMore: true });
+      this.setState({ loading: true });
       this.fetchData(this.state.data.next, (data) => {
         let currDataResults = this.state.data.results;
         let newDataResults  = currDataResults.concat(data.results);
@@ -32,41 +34,60 @@ const WithDataHOC = url => Component => (
         .then(response => response.json())
         .then(data => { 
           successCb && successCb(data)
-          this.setState({ data, loadMore: false });
+          this.setState({ data, loading: false, fetchError: false });
         })
+        // Hanle exception
         .catch(err => { 
-          this.setState({loadMore: false});
-          alert('Error Loading data from: ' + url)
+          this.setState({loading: false, fetchError:true});
         })
     }
     
     render() {
-      const { data, loadMore} = {...this.state};
-      if (data){
-        return (
-              <div>
-                <Component {...this.props} {...this.state} />
-                { data.next && 
-                  ( <div className="text-center">
-                      <button disabled={loadMore} className="load-more-btn btn btn-default" 
-                              onClick={() => this.loadMore()}>
-                              Load More
-                      </button>
-                    </div>
-                  )
-                }
+      const { data, loading, fetchError} = {...this.state};
+      return (
+        <div>
+         {data.results &&  <Component {...this.props} {...this.state} />}
+         {fetchError && 
+            <div className="alert alert-danger">
+              Couldnt retrieve data from: {url}
+            </div>
+         }
+         {loading && <Spinner/>}
+         { data.next && 
+             <div className="text-center">
+                <button disabled={loading} className="load-more-btn btn btn-default" 
+                        onClick={() => this.loadMore()}>
+                        Load More
+                </button>
               </div>
-          )
-      }else{
-        return <Spinner/>
-      }
+          }
+        </div>
+      )
     }
   }
 )
 
 WithDataHOC.propTypes = {
-  url: React.PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 
+    // if (data.results){
+    //     return (
+    //         <div>
+    //          
+    //           { data.next && 
+    //             ( <div className="text-center">
+    //                 <button disabled={loadMore} className="load-more-btn btn btn-default" 
+    //                         onClick={() => this.loadMore()}>
+    //                         Load More
+    //                 </button>
+    //               </div>
+    //             )
+    //           }
+    //         </div>
+    //       )
+    //   }else{
+    //     return <Spinner/>
+    //   }
 export default WithDataHOC
